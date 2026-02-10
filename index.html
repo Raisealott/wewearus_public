@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>We Wear Us — Apparel Print Shop</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Background layer -->
+  <div class="background">
+    <div class="background-texture" role="presentation"></div>
+  </div>
+
+  <!-- Left/right strips: fixed to viewport (don't scroll) -->
+  <div class="border-frame" role="presentation" aria-hidden="true">
+    <div class="border-frame__left"></div>
+    <div class="border-frame__right"></div>
+  </div>
+
+  <!-- Wrapper so top/bottom chains are at top/bottom of page and scroll away -->
+  <div class="page-wrapper">
+    <div class="border-frame__top" role="presentation" aria-hidden="true"></div>
+    <div class="border-frame__bottom" role="presentation" aria-hidden="true"></div>
+    <main class="page-content page-content--with-border">
+    <header class="site-header">
+      <div class="site-header__col site-header__col--left" aria-hidden="true"></div>
+      <div class="site-header__col site-header__col--center">
+        <a class="site-header__logo-link" href="/" aria-label="We Wear Us — Home">
+          <img class="site-header__logo" src="/assets/logo.svg" alt="We Wear Us" width="240" height="80" fetchpriority="high">
+        </a>
+      </div>
+      <div class="site-header__col site-header__col--right" aria-hidden="true"></div>
+    </header>
+
+    <section class="hero" aria-label="Description">
+      <h1 class="hero__heading">APPAREL PRINT SHOP</h1>
+      <div class="hero__description">
+        <p class="hero__line" id="hero-line-a">WE CUSTOMIZE APPAREL FOR YOUR BUSINESS OR PERSONAL NEEDS.</p>
+        <p class="hero__line" id="hero-line-b">TRANSFORM YOUR APPAREL WITH US.</p>
+      </div>
+    </section>
+
+    <section class="services" aria-labelledby="services-heading">
+      <div class="services__grid">
+        <div class="svc-left" aria-hidden="true">
+          <img src="/assets/screen%20printing%20left.svg" alt="" width="200" height="200">
+        </div>
+        <div class="svc-title">
+          <h2 id="services-heading" class="services__title">SERVICES</h2>
+          <p class="services__line">SCREEN PRINTING</p>
+          <p class="services__line">DIRECT TO FILM</p>
+          <p class="services__line">EMBROIDERY</p>
+        </div>
+        <div class="svc-right" aria-hidden="true">
+          <img src="/assets/embroidery%20right.svg" alt="" width="200" height="200">
+        </div>
+      </div>
+    </section>
+
+    <section class="portfolio" aria-labelledby="portfolio-heading">
+      <h2 id="portfolio-heading" class="portfolio__title">PORTFOLIO</h2>
+      <!-- Content to be added -->
+    </section>
+
+    <!-- PNG slideshow: continuous flowing animation, transparent background -->
+    <section class="slideshow" aria-label="Portfolio gallery">
+      <div class="slideshow__track">
+        <img class="slideshow__img" src="/assets/portfolio%20image%201.png" alt="">
+        <img class="slideshow__img" src="/assets/portfolio%20image%202.png" alt="">
+        <img class="slideshow__img" src="/assets/portfolio%20image%201.png" alt="">
+        <img class="slideshow__img" src="/assets/portfolio%20image%202.png" alt="">
+      </div>
+    </section>
+
+    <section class="contact" aria-labelledby="contact-heading">
+      <h2 id="contact-heading" class="contact__title">LOCATION <span class="contact__symbol">-</span> PHONE <span class="contact__symbol">-</span> EMAIL</h2>
+      <div class="contact__details">
+        <p class="contact__line">68487 E. PALM CANYON DRIVE UNIT 54,</p>
+        <p class="contact__line">CATHEDRAL CITY, CALIFORNIA 92234</p>
+        <p class="contact__line"><a class="contact__link" href="tel:+17609690222">760<span class="contact__symbol">-</span>969<span class="contact__symbol">-</span>0222</a></p>
+        <p class="contact__line"><a class="contact__link" href="mailto:HELLO@WEWEARUS.SHOP">HELLO<span class="contact__symbol">@</span>WEWEARUS.SHOP</a></p>
+      </div>
+    </section>
+    </main>
+  </div>
+</body>
+</html>

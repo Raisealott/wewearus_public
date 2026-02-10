@@ -1,0 +1,11 @@
+{
+  "name": "we-wear-us-website",
+  "private": true,
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "devDependencies": {
+    "serve": "^14.2.4"
+  }
+}

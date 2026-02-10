@@ -1,0 +1,662 @@
+/* ============================================
+   We Wear Us — Base & background layer
+   Mobile-first, responsive
+   ============================================ */
+
+/* --------------------------------------------
+   National College — display font (hero heading)
+   Font file: /fonts/National College.otf
+   -------------------------------------------- */
+@font-face {
+  font-family: 'National College';
+  src: url('/fonts/National%20College.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Tactic Sans Ultra';
+  src: url('/fonts/tactic-sans-ultra.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  position: relative;
+}
+
+/* Desktop: scale everything down 20% (equivalent to 80% zoom) */
+@media (min-width: 1024px) {
+  body {
+    zoom: 0.8;
+  }
+}
+
+/* --------------------------------------------
+   Background layer
+   -------------------------------------------- */
+
+.background {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Background texture image */
+.background-texture {
+  position: absolute;
+  inset: 0;
+  background-image: url('assets/assetsbackground-texture.png.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* --------------------------------------------
+   BorderFrame — fixed overlay border (4 sides)
+   Repeating chain SVG; corners overlap.
+   Thickness is responsive: mobile (thinnest) → tablet → desktop.
+   -------------------------------------------- */
+
+:root {
+  --border-frame-size: 20px; /* mobile: smallest */
+
+  /*
+   * Vertical stack spacing (responsive: smaller mobile → larger desktop)
+   * Scale: --space-1 (tight) … --space-6 (loose). Use in layout or override semantic gaps below.
+   */
+  --space-1: clamp(0.25rem, 1vw, 0.5rem);
+  --space-2: clamp(0.5rem, 2vw, 1rem);
+  --space-3: clamp(0.75rem, 3vw, 1.5rem);
+  --space-4: clamp(1rem, 4vw, 2rem);
+  --space-5: clamp(1.5rem, 5vw, 2.5rem);
+  --space-6: clamp(2rem, 6vw, 3.5rem);
+
+  /* Header + hero stack — change these to tweak spacing without touching components */
+  --gap-logo-headline: var(--space-2);       /* logo → "APPAREL PRINT SHOP" */
+  --gap-headline-description: var(--space-1); /* headline → white description (tighter, poster-style) */
+  --gap-description-lines: 0;   /* between the two white lines (no extra paragraph space) */
+}
+
+@media (min-width: 768px) {
+  :root {
+    --border-frame-size: 28px; /* tablet: medium */
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --border-frame-size: 36px; /* desktop: largest */
+  }
+}
+
+.border-frame {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+}
+
+/* Top & bottom: fixed to viewport so they don’t scroll */
+.page-wrapper {
+  position: relative;
+  min-height: 100vh;
+}
+
+.border-frame__top,
+.border-frame__bottom {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: var(--border-frame-size);
+  background-image: url('/assets/chain-h.svg');
+  background-repeat: repeat-x;
+  background-size: auto var(--border-frame-size);
+  background-position: top center;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.border-frame__top {
+  top: 0;
+}
+
+.border-frame__bottom {
+  bottom: 0;
+  background-position: bottom center;
+}
+
+/* Left & right: fixed to viewport so they don’t scroll */
+.border-frame__left,
+.border-frame__right {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: var(--border-frame-size);
+  background-image: url('/assets/chain-v.svg');
+  background-repeat: repeat-y;
+  background-size: var(--border-frame-size) auto;
+  background-position: left center;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.border-frame__left {
+  left: 0;
+}
+
+.border-frame__right {
+  right: 0;
+  background-position: right center;
+}
+
+/* Content sits above background */
+.page-content {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+/* Content padding so it doesn’t sit under the border; overflow clips to this box */
+.page-content--with-border {
+  padding: var(--border-frame-size);
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+/* --------------------------------------------
+   Header — centered logo (3-column grid)
+   Renders inside content safe area; poster-style spacing.
+   -------------------------------------------- */
+
+.site-header {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  justify-items: center;
+  gap: 1rem;
+  padding-top: var(--space-5);
+  padding-bottom: var(--gap-logo-headline);
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  width: 100%;
+}
+
+.site-header__col {
+  min-width: 0;
+}
+
+.site-header__col--left,
+.site-header__col--right {
+  /* Placeholders for future navigation */
+}
+
+.site-header__col--center {
+  grid-column: 2;
+}
+
+.site-header__logo-link {
+  display: block;
+  line-height: 0;
+}
+
+.site-header__logo {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  width: clamp(140px, 40vw, 500px);
+  object-fit: contain;
+}
+
+/* Legacy/utility: title, tagline, hero */
+.site-title {
+  margin: 0;
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: clamp(1.75rem, 5vw, 2.5rem);
+  font-weight: 700;
+  color: #1a1a1a;
+  letter-spacing: 0.02em;
+}
+
+.site-tagline {
+  margin: 0.25rem 0 0;
+  font-size: 1rem;
+  color: #444;
+}
+
+/* --------------------------------------------
+   Hero — description section (logo → headline → lines 2–3)
+   Figma specs on desktop; responsive scaling below. National College on .hero.
+   -------------------------------------------- */
+
+.hero {
+  font-family: 'National College', serif;
+  text-align: center;
+  padding-top: 0;
+  padding-bottom: var(--space-5);
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  max-width: 100%;
+}
+
+/* Line 1 — Heading: Figma desktop 80px, 8px letter-spacing, #EFDD6B */
+.hero__heading {
+  font-size: clamp(1.75rem, 8vw, 8rem);
+  font-weight: 400;
+  letter-spacing: clamp(2px, 0.8vw, 8px);
+  line-height: normal;
+  text-transform: uppercase;
+  color: #EFDD6B;
+  margin: 0 0 var(--gap-headline-description);
+}
+
+/* Wrapper for the two white lines — two-line poster layout */
+.hero__description {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 90vw;
+}
+
+/* Line A & B — two separate block elements; #FFFFFF, National College (from .hero) */
+.hero__line {
+  font-size: clamp(1rem, 3.5vw, 2.6875rem);
+  font-weight: 400;
+  letter-spacing: clamp(1px, 0.4vw, 4.3px);
+  line-height: normal;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  margin: 0 0 var(--gap-description-lines);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero__line:last-child {
+  margin-bottom: 0;
+}
+
+/* Tablet: exactly two lines — Line 1 no wrap; scale so first sentence fits */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .hero__description {
+    max-width: 100%;
+  }
+
+  .hero__line {
+    font-size: clamp(1.5rem, 2.8vw, 1.75rem);
+    letter-spacing: clamp(2px, 0.25vw, 2.8px);
+  }
+
+  .hero__line:first-child {
+    white-space: nowrap;
+  }
+}
+
+/* Desktop: scale to fit; allow first line to wrap when narrow so it stays inside border */
+@media (min-width: 1024px) {
+  .hero__description {
+    max-width: 100%;
+  }
+
+  .hero__line {
+    font-size: min(43px, 2.9vw);
+    letter-spacing: min(4.3px, 0.1em);
+  }
+}
+
+/* Wide desktop: force first line to stay on one line when there’s room */
+@media (min-width: 1280px) {
+  .hero__line:first-child {
+    white-space: nowrap;
+  }
+}
+
+/* Large desktop: full Figma 43px when viewport fits first line */
+@media (min-width: 1400px) {
+  .hero__line {
+    font-size: 43px;
+    letter-spacing: 4.3px;
+  }
+}
+
+/* --------------------------------------------
+   Services section — grid: left SVG | title | right SVG
+   -------------------------------------------- */
+.services {
+  font-family: 'National College', serif;
+  padding: var(--space-5) 1.5rem var(--space-6);
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/*
+ * Tablet: 641px–1180px. Split so iPad Air (~820px) doesn’t overlap; iPad Pro (~1024px) has room.
+ */
+@media (min-width: 641px) and (max-width: 1180px) {
+  .hero {
+    padding-bottom: var(--space-3);
+    margin-bottom: 0;
+  }
+
+  .hero__description {
+    margin-bottom: 0;
+  }
+
+  .hero__line:last-child {
+    margin-bottom: 0;
+  }
+
+  .services {
+    padding-top: var(--space-3);
+    padding-bottom: var(--space-4);
+    margin-bottom: 0;
+  }
+
+  .portfolio {
+    padding-top: var(--space-3);
+  }
+}
+
+/* Smaller tablets (e.g. iPad Air ~820px): no overlap, comfortable spacing */
+@media (min-width: 641px) and (max-width: 900px) {
+  .services {
+    margin-top: 0;
+  }
+
+  .portfolio {
+    margin-top: 0;
+  }
+
+  .svc-left,
+  .svc-right {
+    height: clamp(160px, 22vw, 240px);
+  }
+}
+
+/* Larger tablets (e.g. iPad Pro ~1024px) */
+@media (min-width: 901px) and (max-width: 1180px) {
+  .services {
+    margin-top: 0;
+  }
+
+  .portfolio {
+    margin-top: 0;
+  }
+
+  .svc-left,
+  .svc-right {
+    height: clamp(120px, 16vw, 180px);
+  }
+}
+
+/* Desktop (wider than tablet): minimal gap between Services and Portfolio */
+@media (min-width: 1181px) {
+  .services {
+    padding-bottom: var(--space-1);
+  }
+
+  .portfolio {
+    padding-top: var(--space-1);
+  }
+}
+
+/* Desktop/tablet: 3 columns — left SVG, centered text, right SVG */
+.services__grid {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: var(--space-3);
+  max-width: 100%;
+}
+
+/* Mobile: 2 cols × 2 rows — row 1: both SVGs; row 2: title spans full width */
+@media (max-width: 640px) {
+  .services__grid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    gap: var(--space-2);
+  }
+
+  .svc-left {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .svc-right {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .svc-title {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+}
+
+/* SVG containers: same height for both, responsive scaling via clamp() */
+.svc-left,
+.svc-right {
+  min-width: 0;
+  width: 100%;
+  height: clamp(160px, 300vw, 500px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.svc-left img,
+.svc-left svg,
+.svc-right img,
+.svc-right svg {
+  height: 100%;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+}
+
+@media (max-width: 640px) {
+  .services {
+    padding-top: 0;
+    margin-top: -0.5rem;
+  }
+
+  .portfolio {
+    padding-top: 0;
+    margin-top: -3rem;
+    padding-bottom: 0;
+  }
+
+  .slideshow {
+    padding-top: 0;
+  }
+
+  .svc-left,
+  .svc-right {
+    height: clamp(160px, 50vw, 300px);
+  }
+}
+
+/* Center the text block */
+.svc-title {
+  text-align: center;
+  justify-self: center;
+}
+
+/* Line 1: SERVICES — #EFDD6B */
+.services__title {
+  font-size: clamp(1.5rem, 8vw, 8rem);
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #EFDD6B;
+  margin: 0 0 var(--space-2);
+}
+
+/* Lines 2–4: service names — #FFFFFF; spacing scales with viewport */
+.services__line {
+  font-size: clamp(1rem, 6vw, 6rem);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  margin: 0 0 var(--space-1);
+}
+
+.services__line:last-of-type {
+  margin-bottom: 0;
+}
+
+/* --------------------------------------------
+   Portfolio section — same title style as Services
+   -------------------------------------------- */
+.portfolio {
+  font-family: 'National College', serif;
+  padding: var(--space-5) 1.5rem var(--space-1);
+  text-align: center;
+  max-width: 100%;
+}
+
+.portfolio__title {
+  font-size: clamp(1.5rem, 8vw, 8rem);
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #EFDD6B;
+  margin: 0;
+}
+
+/* --------------------------------------------
+   Slideshow — continuous flow animation, transparent
+   -------------------------------------------- */
+.slideshow {
+  background: transparent;
+  padding: 0 0 var(--space-2);
+  overflow: hidden;
+}
+
+.slideshow__track {
+  display: flex;
+  width: 200%;
+  padding: 0 1.5rem;
+  animation: slideshow-flow 15s linear infinite;
+}
+
+@keyframes slideshow-flow {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.slideshow__img {
+  flex: 0 0 25%;
+  width: 25%;
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+
+/* Desktop: limit height of slideshow PNGs; overlapping slots so images touch side-by-side */
+@media (min-width: 1024px) {
+  .slideshow__track {
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
+    gap: 0;
+  }
+
+  .slideshow__img {
+    flex: 0 0 32%;
+    width: 32%;
+    max-height: 525px;
+    object-fit: contain;
+    margin-right: 0;
+  }
+}
+
+/* --------------------------------------------
+   Contact: Location, Phone, Email
+   Header: same style as SERVICES / PORTFOLIO (#EFDD6B, National College).
+   Symbols (- @) use Tactic Sans Ultra. Subtext: #FFFFFF, 4 lines.
+   -------------------------------------------- */
+.contact {
+  font-family: 'National College', serif;
+  padding: var(--space-2) 1.5rem var(--space-6);
+  text-align: center;
+  max-width: 100%;
+}
+
+.contact__title {
+  font-size: clamp(2.25rem, 11vw, 8rem);
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #EFDD6B;
+  margin: 0 0 var(--space-3);
+  line-height: normal;
+}
+
+.contact__symbol {
+  font-family: 'Tactic Sans Ultra', sans-serif;
+}
+
+.contact__details {
+  margin: 0;
+}
+
+.contact__line {
+  font-family: 'National College', serif;
+  font-size: clamp(1rem, 5vw, 4rem);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  margin: 0 0 var(--space-1);
+  line-height: 1.3;
+}
+
+.contact__line:last-of-type {
+  margin-bottom: 0;
+}
+
+.contact__link {
+  color: #FFFFFF;
+  text-decoration: none;
+}
+
+.contact__link:hover {
+  text-decoration: underline;
+}
+
+/* Mobile: header one line, subtext exactly 4 lines — reduce size so nothing wraps */
+@media (max-width: 640px) {
+  .contact__title {
+    font-size: clamp(1.25rem, 6.25vw, 1.9rem);
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+  }
+
+  .contact__line {
+    font-size: clamp(0.75rem, 3.8vw, 1.1rem);
+    letter-spacing: 0.02em;
+  }
+}
