@@ -32,8 +32,8 @@
 html {
   font-size: 16px;
   -webkit-text-size-adjust: 100%;
-  /* Transparent so Safari’s translucent bars show the .background (red texture) behind them */
-  background-color: transparent;
+  /* Red fallback so safe areas are never white; when Safari uses translucent bars, red shows through */
+  background-color: #7a1e2a;
 }
 
 body {
@@ -42,7 +42,7 @@ body {
   min-height: 100dvh;
   min-height: -webkit-fill-available;
   position: relative;
-  background-color: transparent;
+  background-color: #7a1e2a;
 }
 
 /* Desktop: scale everything down 20% (equivalent to 80% zoom) */
