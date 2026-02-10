@@ -32,8 +32,8 @@
 html {
   font-size: 16px;
   -webkit-text-size-adjust: 100%;
-  /* Match site red so safe areas (notch, curves) never show white */
-  background-color: #7a1e2a;
+  /* Transparent so Safari’s translucent bars show the .background (red texture) behind them */
+  background-color: transparent;
 }
 
 body {
@@ -42,7 +42,7 @@ body {
   min-height: 100dvh;
   min-height: -webkit-fill-available;
   position: relative;
-  background-color: #7a1e2a;
+  background-color: transparent;
 }
 
 /* Desktop: scale everything down 20% (equivalent to 80% zoom) */
